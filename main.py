@@ -1,7 +1,7 @@
 import openai
 import time
 
-openai.api_key = "YOUR_API_KEY"
+openai.api_key = "YOUR_API_KEY" #get api key here: https://openai.com/blog/openai-api
 
 def generate_response(prompt):
     response = openai.Completion.create(
