@@ -1,15 +1,20 @@
-import os
 import openai
+import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
-response = openai.Completion.create(
-  model="text-davinci-003",
-  prompt="You: What have you been up to?\nFriend: Watching old movies.\nYou: Did you watch anything interesting?\nFriend:",
-  temperature=0.5,
-  max_tokens=60,
-  top_p=1.0,
-  frequency_penalty=0.5,
-  presence_penalty=0.0,
-  stop=["You:"]
-)
+def generate_text(prompt):
+    response = openai.Completion.create(
+        engine="davinci",
+        prompt=prompt,
+        max_tokens=1024,
+        n=1,
+        stop=None,
+        temperature=0.7,
+    )
+    message = response.choices[0].text.strip()
+    return message
+
+prompt = "Create a virtual girlfriend for me."
+generated_text = generate_text(prompt)
+print(generated_text)
